@@ -11,6 +11,7 @@ database = "NBA"
 
 engine = create_engine(f"mysql+pymysql://{username}:{password}@{host}:{port}/{database}")
 metadata = MetaData()
+Base = declarative_base()
 
 users = Table(
     "users", metadata,
@@ -27,6 +28,21 @@ orders = Table(
 
 metadata.create_all(engine)
 
+
+class User(Base): 
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(50))
+    orders = relationship("Order", back_populates="user")
+
+class Order(Base): 
+    __tablename__ = "orders"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    product = Column(String(50))
+    user_id = Column(Integer, ForeignKey("users.id"))
+    user = relationship("User", back_populates="orders")
+
+Base.metadata.create_all(engine)
 
 with Session(engine) as session:
     # Insert users
