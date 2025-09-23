@@ -1,6 +1,5 @@
 from sqlalchemy import create_engine
 import pandas as pd
-import mysql.connector 
 from sqlalchemy import Table, Column, Integer, String, ForeignKey, MetaData
 from sqlalchemy.orm import declarative_base, relationship, Session
 
