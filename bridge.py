@@ -3,8 +3,8 @@ import pandas as pd
 from sqlalchemy import Table, Column, Integer, String, ForeignKey, MetaData
 from sqlalchemy.orm import declarative_base, relationship, Session
 
-username = "root"
-password = ""
+username = "admin"
+password = "2025"
 host = "localhost"   
 port = 3306             
 database = "NBA"
