@@ -13,46 +13,58 @@ engine = create_engine(f"mysql+pymysql://{username}:{password}@{host}:{port}/{da
 metadata = MetaData()
 Base = declarative_base()
 
-users = Table(
-    "users", metadata,
-    Column("id", Integer, primary_key=True, autoincrement=True),
-    Column("name", String(100)),
-)
+class Player(Base):
+    __tablename__ = "players"
+    id = Column(String, primary_key= True)
+    name = Column(String(64), unique= True)
+    weight = Column(Integer)
+    height = Column(Integer)
+    exp = Column(Integer)
+    age = Column(Integer)
+    
+    seasons = relationship("Season", back_populates="player")
+    positions = relationship("Position", back_populates="player")
+    
+class Season(Base):
+    __tablename__ = "seasons"
+    id = Column(String ,primary_key= True)
+    season = Column(Integer)
+    player_id = Column(String(64), ForeignKey("players.id"))
+    Rank = Column(Integer)
+    which_group_id = Column(String, ForeignKey("which_group.id"))
+    
+    player = relationship("Player", back_populates="seasons")
+    group = relationship("Group", back_populates="seasons")
 
-orders = Table(
-    "orders", metadata,
-    Column("id", Integer, primary_key=True, autoincrement=True),
-    Column("user_id", Integer, ForeignKey("users.id")),
-    Column("product", String(100))
-)
+    
+class Position(Base):
+    __tablename__ = "positions"
+    id = Column(String, primary_key= True)
+    position = Column(String(64))
+    player_id = Column(String(64),ForeignKey("players.id"))
+    
+    player = relationship("Player", back_populates="positions")
 
-metadata.create_all(engine)
+    
+class Group(Base):
+    __tablename__ = "which_group"
+    id = Column(String, primary_key= True)
+    group_name = Column(String(32))
+    
+    seasons = relationship("Season", back_populates="group")
+    
+    
+# Base.metadata.create_all(engine)
 
-
-class User(Base): 
-    __tablename__ = "users"
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String(50))
-    orders = relationship("Order", back_populates="user")
-
-class Order(Base): 
-    __tablename__ = "orders"
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    product = Column(String(50))
-    user_id = Column(Integer, ForeignKey("users.id"))
-    user = relationship("User", back_populates="orders")
-
-Base.metadata.create_all(engine)
-
-with Session(engine) as session:
-    # Insert users
-    for _, row in df_users.iterrows():
-        user = User(name=row["name"])
-        session.add(user)
-
-    # Insert orders
-    for _, row in df_orders.iterrows():
-        order = Order(user_id=row["user_id"], product=row["product"])
-        session.add(order)
-
-    session.commit()
+# with Session(engine) as session:
+#     for _, row in df_players.iterrows():
+#         player = Player(
+#             name=row["name"],
+#             weight=row["weight"],
+#             height=row["height"],
+#             exp=row["exp"],
+#             age=row["age"]
+#         )
+#         session.add(player)
+    
+#     session.commit()
