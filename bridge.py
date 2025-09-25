@@ -7,12 +7,12 @@ import cryptography
 
 
 username = "admin"
-password = "2025"
+password = "Admin@2025"
 host = "localhost"   
 port = 3306             
 database = "NBA"
 
-engine = create_engine(f"mysql+pymysql://{username}:{password}@{host}:{port}/{database}")
+engine = create_engine(f"mysql+pymysql://{username}:{password}@{host}:{port}/{database}", connect_args={"connect_timeout": 10})
 metadata = MetaData()
 Base = declarative_base()
 
