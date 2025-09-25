@@ -5,7 +5,7 @@ from sqlalchemy.orm import declarative_base, relationship, Session
 
 username = "root"
 password = ""
-host = ""   
+host = "localhost"   
 port = 3306             
 database = "NBA"
 
@@ -54,7 +54,7 @@ class Group(Base):
     seasons = relationship("Season", back_populates="group")
     
     
-# Base.metadata.create_all(engine)
+Base.metadata.create_all(engine)
 
 # with Session(engine) as session:
 #     for _, row in df_players.iterrows():
