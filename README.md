@@ -39,6 +39,6 @@ With a clean dataset in place, we moved on to statistical analysis. We started w
 
  - [Mehran Mahdiani]() (Bootcamp Mentor)
 
- - [Melika Molaii]() (Bootcamp Manager)
+ - [Melika Molaei]() (Bootcamp Manager)
 
  - [Quera College](https://Quera.org)
