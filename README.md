@@ -10,14 +10,15 @@ We began by scraping data from a target website. This involved carefully navigat
 
 Phase 2 – Data Structuring & Storage
 
-Once collected, the raw data was transformed into a format suitable for storage and analysis. We designed and implemented a MySQL database to house the data, then exported cleaned and structured subsets into Excel sheets. This step included extensive data cleaning to ensure consistency and usability.
+Once collected, the raw data was transformed into a format suitable for storage and analysis. We designed and implemented a MySQL database to house the data. This step included extensive data cleaning to ensure consistency and usability. Afterwards the data base was connected to python using sqlalchemy which is a powerful tool to bridge sql and python. 
 
 Phase 3 – Statistical Analysis & Insights
 
-With a clean dataset in place, we moved on to statistical analysis. We started with data visualization to gain an initial understanding of trends and patterns. From there, we conducted hypothesis testing to uncover deeper insights and validate our observations. This marked the final stage of the project, wrapping up with both visual and statistical interpretations of the data.
+With a clean dataset in place, we moved on to statistical analysis. We started with data visualization to gain an initial understanding of trends and patterns. From there, we conducted hypothesis testing to uncover deeper insights and validate our observations. This marked the final stage of the project, wrapping up with both visual and statistical interpretations of the data. Analysis of the data included visualizations and hypothesis testing. 
+
 ## Tech Used
 
-**Python:** Pandas, Bs4, Requests, Selenium, Matplotlib, Plotly, Scipy
+**Python:** Pandas, Bs4, Requests, Selenium, Matplotlib, Plotly, Scipy, sqlalchemy, seaborn
 
 **Mysql** 
 
